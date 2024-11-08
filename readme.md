@@ -13,8 +13,8 @@ This project is a Reddit-based restaurant recommender system that uses AI to pro
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/sobebarali/reddit-restaurant-bot.git
-cd reddit-restaurant-bot
+git clone https://github.com/sobebarali/ollama-langchain-agent.git
+cd ollama-langchain-agent
 ```
 
 2. Create and activate a virtual environment:
