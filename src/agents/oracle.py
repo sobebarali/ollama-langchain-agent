@@ -98,7 +98,7 @@ def get_ai_recommendations(query: SearchQuery, reddit_results: list[Restaurant])
         logging.info("Model returned raw result.")
     except Exception as e:
         logging.error(f"Error invoking the AI model: {e}")
-        return SearchResult(query=query.query, restaurants=[])
+        return SearchResult(query=query, restaurants=[])
     
     # Parse the model's output
     output_parser = JsonOutputParser()
@@ -113,12 +113,12 @@ def get_ai_recommendations(query: SearchQuery, reddit_results: list[Restaurant])
             parsed_result = extract_json_from_string(result)
         except ValueError as ve:
             logging.error(f"Error extracting JSON: {ve}")
-            return SearchResult(query=query.query, restaurants=[])
+            return SearchResult(query=query, restaurants=[])
     
     # Return structured SearchResult
     try:
         return SearchResult(
-            query=query.query,
+            query=query,
             restaurants=[
                 Restaurant(**restaurant)
                 for restaurant in parsed_result.get("recommendations", [])
@@ -126,4 +126,4 @@ def get_ai_recommendations(query: SearchQuery, reddit_results: list[Restaurant])
         )
     except (KeyError, TypeError) as e:
         logging.error(f"Error processing final result: {e}")
-        return SearchResult(query=query.query, restaurants=[])
+        return SearchResult(query=query, restaurants=[])
